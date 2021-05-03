@@ -1,0 +1,25 @@
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        freqs = [] #number, freq
+        final = [] 
+        for i in nums:
+            counter = 0
+            for j in nums:
+                if i == j:
+                    counter+=1
+                else:
+                    pass
+            freqs.append([i,counter])
+        for i in range(len(freqs)):
+            for j in range(i+1, len(freqs)):
+                if freqs[i][1] > freqs[j][1]:
+                    freqs[i], freqs[j] = freqs[j], freqs[i]
+                elif freqs[i][1] == freqs[j][1]:
+                    if freqs[i][0] < freqs[j][0]:
+                        freqs[i], freqs[j] = freqs[j], freqs[i]
+                    else:
+                        pass 
+        for i in freqs:
+            final.append(i[0])
+        return final
+
