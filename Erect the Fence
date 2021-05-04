@@ -1,0 +1,85 @@
+class Solution:
+    def outerTrees(self, trees: List[List[int]]) -> List[List[int]]:
+        far_outs = []
+        tuples = []
+        final = []
+        
+        for x in range(2):
+            list1=[]
+            for i in trees:
+                list1.append(i[x])
+            for i in range(len(list1)):
+                for j in range(i+1, len(list1)):
+                    if list1[i] > list1[j]:
+                        list1[i], list1[j] = list1[j], list1[i]
+            tuples.append((list1[0],list1[-1]))
+        for x in range(2):
+            trees_ = [] 
+            for i in trees:
+                trees_.append(i[x])
+            for i in trees_:
+                if tuples[x][0] == i:
+                    far_outs.append(trees[trees_.index(i)])
+                elif tuples[x][1] == i: 
+                    far_outs.append(trees[trees_.index(i)])
+        #return far_outs
+        for i in [0,1]:
+            x1 = far_outs[i][0]
+            x2 = far_outs[2][0]
+            y1 = far_outs[i][1]
+            y2 = far_outs[2][1]
+
+            if (x2-x1) != 0:
+                m = (y2-y1)/(x2-x1)
+                for tree in trees:
+                    if tree[1] - y2 <= m*(tree[0] - x2):
+                        final.append(tree)
+                    else:
+                        pass
+            else:
+                if i == 0: 
+                    for tree in trees:
+                        if tree[0] <= x1:
+                            final.append(tree)
+                        else:
+                            pass
+                        
+                elif i == 1:
+                    for tree in trees:
+                        if tree[0] >= x1:
+                            final.append(tree)
+                        else:
+                            pass
+        for i in [0,1]:
+            x1 = far_outs[i][0]
+            x2 = far_outs[3][0]
+            y1 = far_outs[i][1]
+            y2 = far_outs[3][1]
+
+            if (x2-x1) != 0:
+                m = (y2-y1)/(x2-x1)
+                for tree in trees:
+                    if tree[1] - y2 >= m*(tree[0] - x2):
+                        final.append(tree)
+                    else:
+                        pass
+            else:
+                if i == 0: 
+                    for tree in trees:
+                        if tree[0] <= x1:
+                            final.append(tree)
+                        else:
+                            pass
+                        
+                elif i == 3:
+                    for tree in trees:
+                        if tree[0] >= x1:
+                            final.append(tree)
+                        else:
+                            pass
+        return_list = [] 
+        for i in final:
+            if i not in return_list:
+                return_list.append(i)
+        
+        return return_list
