@@ -1,0 +1,16 @@
+class Solution:
+    def isPossible(self, target: List[int]) -> bool:
+        A = target
+        for x in range(max(target)):
+            others = []
+            max_ = max(A)
+            for i in A:
+                if i != max_:
+                    others.append(i)
+            A[A.index(max_)] = max_ - sum(others)
+            if sum(A) == len(A):
+                return True
+            elif sum(A) < len(A):
+                return False
+
+## python3 solution to 'hard' problem on leet code, it worked for 61 out of 65 test cases idk why it broke for the others.
