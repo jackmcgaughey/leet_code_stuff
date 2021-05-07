@@ -1,0 +1,14 @@
+class Solution:
+    def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+        counter = 0
+        num_ = 0
+        final = [] 
+        for i in reversed(num):
+            num_ += (i * (10**counter))
+            counter+=1
+        target = num_+k
+        num_ = "%s"%target
+        for i in range(len(num_)):
+            final.append(num_[i])
+        return final
+
