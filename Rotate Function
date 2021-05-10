@@ -1,0 +1,17 @@
+class Solution:
+    def maxRotateFunction(self, nums: List[int]) -> int:
+        sums = [] 
+        def shift():
+            x = nums[0]
+            for i in range(len(nums)-1):
+                nums[i] = nums[i+1]
+            nums[len(nums)-1] = x
+        for x in range(len(nums)):
+            temp = [i[0]*i[1] for i in enumerate(nums)]
+            sum_ = 0
+            for i in temp:
+                sum_ += i 
+            sums.append(sum_)
+            shift()
+        return max(sums)
+        
