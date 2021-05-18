@@ -1,0 +1,29 @@
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        def find_lens(nums):
+            lens = [] 
+            for x in enumerate(nums):
+                norths= [] 
+                for j in nums[x[0]:]:
+                    if j > x[1]:
+                        norths.append(j)
+                lens.append(norths)
+            return lens
+        def find_max(List):
+            x1 = List[0]
+            for x in List:
+                if len(x) > len(x1):
+                    x1 = x
+                else:
+                    pass
+            return x1
+        def max_of_list(nums):
+            return find_max(find_lens(nums))
+
+        counter = 1
+        max_ = max_of_list(nums)
+        while len(max_)>0:
+            max_ = max_of_list(max_)
+            counter += 1
+        return counter
+            
