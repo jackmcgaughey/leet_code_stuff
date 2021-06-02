@@ -1,0 +1,20 @@
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        #must be even; can cut down time by not trying ones that make it odd
+        valid_indicies = [] 
+        for x in enumerate(nums):
+            if sum(nums)%2==0:
+                if x[1]%2==0:
+                    valid_indicies.append(x[0])
+                else:
+                    pass
+            else:
+                if x[1]%2==1:
+                    valid_indicies.append(x[0])
+                else:
+                    pass
+        for x in valid_indicies:
+            left_sum, right_sum = sum(nums[:x]), sum(nums[x+1:])
+            if left_sum == right_sum:
+                return x
+        return -1
