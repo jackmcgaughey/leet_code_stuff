@@ -1,0 +1,14 @@
+class Solution:
+    def findMaxValueOfEquation(self, points: List[List[int]], k: int) -> int:
+        valid_indicies = []
+        xs = list(enumerate([x for x, y in points]))
+        for x in xs:
+            for y in xs[x[0]+1:]:
+                if y[1] - x[1] <= k:
+                    valid_indicies.append((x[0],y[0]))
+        solutions = []
+        for i, j in valid_indicies:
+            #compare elements i and j of points
+            diff = abs(points[i][0] - points[j][0])
+            solutions.append(points[i][1] + points[j][1] + diff)
+        return max(solutions)
